@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组-盛水最多的容器-优化算法</title>
+  </head>
+  <body>
+    <script>
+      const heightsArray = [4, 8, 1, 2, 3, 9]
+      // S = min（a,b）* (bi - ai)
+      const getMaxWaterContainer = function (heights) {
+        let p1 = 0,
+          p2 = heights.length - 1,
+          maxArea = 0
+        console.log({ p1, p2, maxArea })
+
+        while (p1 < p2) {
+          const height = Math.min(heights[p1], heights[p2])
+          const width = p2 - p1
+          const area = height * width
+          console.log({ height, width, area })
+          maxArea = Math.max(maxArea, area)
+          console.log({ maxArea })
+          if (heights[p1] <= heights[p2]) {
+            p1++
+          } else {
+            p2--
+          }
+        }
+        return maxArea
+      }
+
+      console.log(getMaxWaterContainer(heightsArray))
+
+      //时间复杂度：O(n)
+      //空间复杂度：O(1)
+    </script>
+  </body>
+</html>
