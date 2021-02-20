@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组-接雨水-算法优化</title>
+  </head>
+  <body>
+    <script>
+      const elevationArray = [0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2]
+      // currentWater = min(maxL,maxR) - CH
+      // 1 分析两个指针中值较小的一个
+      // 2 判断移动的这个指针指向的值和它同侧的最大值的大小
+      // （1） P > Max --> 更新同侧的Max值为P
+      //  (2) P < Max --> 计算接到雨水值，累加到totalWater
+      // 3 向内侧移动较小的这个指针
+      // 4 重复上方的步骤
+      const getTrappedRainwater = function (heights) {
+        let left = 0,
+          right = heights.length - 1,
+          totalWater = 0,
+          maxLeft = 0,
+          maxRight = 0
+        while (left < right) {
+          if (heights[left] <= heights[right]) {
+            if (heights[left] >= maxLeft) {
+              maxLeft = heights[left]
+            } else {
+              totalWater += maxLeft - heights[left]
+            }
+            left++
+          } else {
+            if (heights[right] >= maxRight) {
+              maxRight = heights[right]
+            } else {
+              totalWater += maxRight - heights[right]
+            }
+            right--
+          }
+        }
+        return totalWater
+      }
+      //时间复杂度 ：O(n)
+      //空间复杂度 ：O(1)
+      console.log(getTrappedRainwater(elevationArray))
+    </script>
+  </body>
+</html>
