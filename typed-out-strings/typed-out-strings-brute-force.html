@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字符串——比较含退格的字符串-暴力算法</title>
+  </head>
+  <body>
+    <script>
+      const string1 = 'ab#z'
+      const string2 = 'az#z'
+
+      //1.创建一个通用的函数将字符串转换成数组
+      const buildString = function (string) {
+        const stringToArray = []
+        for (let p = 0; p < string.length; p++) {
+          if (string[p] !== '#') {
+            stringToArray.push(string[p])
+          } else {
+            stringToArray.pop()
+          }
+        }
+        return stringToArray //O(n)
+      }
+      //2.创建比较字符串的函数
+      var backspaceCompare = function (S, T) {
+        const finalS = buildString(S) //O(a)
+        const finalT = buildString(T) //O(b)
+
+        if (finalS.length !== finalT.length) {
+          return false
+        } else {
+          for (let p = 0; p < finalS.length; p++) {
+            if (finalS[p] !== finalT[p]) {
+              //O(a) or O(b)
+              return false
+            }
+          }
+        }
+
+        return true
+      }
+      //时间复杂度：O(2a+b) or O(a+2b) ==> O(a+b)
+      //空间复杂度：O(a+b)
+      console.log(backspaceCompare(string1, string2))
+    </script>
+  </body>
+</html>
