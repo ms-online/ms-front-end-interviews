@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字符串——无重复字符的最长子串-暴力算法</title>
+  </head>
+  <body>
+    <script>
+      const string = 'abccabb'
+      //  L
+      //  R
+
+      const lengthOfLongestSubstring = function (s) {
+        //判断特殊情况
+        if (s.length <= 0) return s.length
+
+        let longest = 0
+        for (let left = 0; left < s.length; left++) {
+          let seenChars = {},
+            currentLength = 0
+
+          for (let right = left; right < s.length; right++) {
+            const currentChar = s[right]
+
+            if (!seenChars[currentChar]) {
+              currentLength++
+              seenChars[currentChar] = true
+              longest = Math.max(longest, currentLength)
+            } else {
+              break
+            }
+          }
+        }
+
+        return longest
+      }
+
+      console.log(lengthOfLongestSubstring(string))
+      //时间复杂度：O(n^2)
+      //空间复杂度：O(n)
+    </script>
+  </body>
+</html>
