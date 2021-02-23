@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字符串——验证回文串-指针由外向内</title>
+  </head>
+  <body>
+    <script>
+      const string = 'A man, a plan, a canal: Panama'
+
+      const isValidPalindrome = function (s) {
+        //使用正则进行字符串处理
+        s = s.replace(/[^A-Za-z0-9]/g, '').toLowerCase()
+
+        // 在字符串的开始和结尾处初始化左/右指针
+        let left = 0
+        right = s.length - 1
+
+        // 在比较字符串时循环遍历字符串字符，然后将指针向中心移动
+        while (left < right) {
+          if (s[left] !== s[right]) {
+            return false
+          }
+
+          left++
+          right--
+        }
+
+        return true
+      }
+
+      console.log(isValidPalindrome(string))
+    </script>
+  </body>
+</html>
