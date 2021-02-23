@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字符串——几乎是回文</title>
+  </head>
+  <body>
+    <script>
+      const string = 'abccdba'
+      //                L R
+
+      // 验证回文函数
+      const isValidPalindrome = function (s, left, right) {
+        while (left < right) {
+          if (s[left] !== s[right]) {
+            return false
+          }
+          left++
+          right--
+        }
+        return true
+      }
+
+      const isAlmostPalindrome = function (s) {
+        let left = 0,
+          right = s.length - 1
+
+        while (left < right) {
+          //有冲突
+          if (s[left] !== s[right]) {
+            return (
+              isValidPalindrome(s, left, right - 1) ||
+              isValidPalindrome(s, left + 1, right)
+            )
+          }
+          left++
+          right--
+        }
+        return true
+      }
+
+      console.log(isAlmostPalindrome(string))
+      //时间复杂度：O(n)
+      //空间复杂度：O(1)
+    </script>
+  </body>
+</html>
