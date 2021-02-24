@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>链表——反转链表（二）</title>
+  </head>
+  <body>
+    <script>
+      // ---- 解决方案 ----
+      //原始链表 ： 1 --> 2 --> 3 --> 4 --> 5 --> null
+      //反转链表 ： 4 --> 3 --> 2 --> 1 --> 5 --> null
+      // m = 1, n = 4
+      var reverseBetween = function (head, m, n) {
+        //初始化变量
+        let currentPos = 1,
+          currenNode = head
+        let start = head
+
+        //找到反转子串的start及子串反转的开始位置
+        while (currentPos < m) {
+          start = currenNode //1
+          currentNode = currentNode.next //2
+          currentPos++ //2
+        }
+
+        //进入子串反转步骤
+        let newList = null,
+          tail = currenNode
+
+        while (currentPos >= m && currentPos <= n) {
+          const nextTemp = currenNode.next
+          curretNode.next = newList
+          newList = currenNode
+          currenNode = nextTemp
+          currentPos++
+        }
+
+        start.next = newList
+        tail.next = currenNode
+
+        if (m > 1) {
+          return head
+        } else {
+          return newList
+        }
+      }
+
+      //时间复杂度：O(n)
+      //空间复杂度：O(1)
+    </script>
+  </body>
+</html>
