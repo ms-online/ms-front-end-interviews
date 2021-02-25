@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>链表——环形链表 - 弗洛伊德龟兔赛跑</title>
+  </head>
+  <body>
+    <script>
+      // 测试链表：1 --> 2 --> 3 --> 4 --> 5 --> 6 --> 7 --> 8 --> 3
+      const findCycle = function (head) {
+        if (!head) return head
+
+        let tortoise = head,
+          rabbit = head
+
+        while (true) {
+          tortoise = tortoise.next
+          rabbit = rabbit.next
+          //验证是否为环形链表
+          if (rabbit === null || rabbit.next === null) {
+            return null
+          } else {
+            rabbit = rabbit.next
+          }
+
+          if (tortoise === rabbit) break
+        }
+
+        //找到开始的环形结点
+        let p1 = head,
+          p2 = tortoise
+        while (p1 !== p2) {
+          p1 = p1.next
+          p2 = p2.next
+        }
+        return p2
+      }
+
+      //T:O(n)
+      //S:O(1)
+    </script>
+  </body>
+</html>
