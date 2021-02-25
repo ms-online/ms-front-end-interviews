@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>链表——环形链表</title>
+  </head>
+  <body>
+    <script>
+      // 测试链表：1 --> 2 --> 3 --> 4 --> 5 --> 6 --> 7 --> 8 --> 3
+      const findCycle = function (head) {
+        const seenNodes = new Set()
+        let currenNode = head
+
+        while (!seenNodes.has(currenNode)) {
+          if (currenNode.next === null) {
+            return null
+          }
+
+          seenNodes.add(currenNode)
+          currenNode = currenNode.next
+        }
+        return currenNode
+      }
+
+      //T:O(n)
+      //S:O(n)
+    </script>
+  </body>
+</html>
