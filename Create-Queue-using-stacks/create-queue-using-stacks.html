@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>队列——用堆栈实现队列</title>
+  </head>
+  <body>
+    <script>
+      class QueueWithStacks {
+        constructor() {
+          this.in = []
+          this.out = []
+        }
+
+        //入队列
+        enqueue(value) {
+          this.in.push(value)
+        }
+
+        //出队列
+        dequeue() {
+          if (this.out.length === 0) {
+            while (this.in.length > 0) {
+              this.out.push(this.is.pop())
+            }
+          }
+          return this.out.pop()
+        }
+
+        //访问队列第一个值
+        peek() {
+          if (this.out.length === 0) {
+            while (this.in.length > 0) {
+              this.out.push(this.is.pop())
+            }
+          }
+          return this.out[this.out.length - 1]
+        }
+
+        //判断是否为空
+        empty() {
+          return this.in.length === 0 && this.out.length === 0
+        }
+      }
+    </script>
+  </body>
+</html>
