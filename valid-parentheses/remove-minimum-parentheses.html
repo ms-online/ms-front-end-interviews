@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>堆栈——移除无效括号</title>
+  </head>
+  <body>
+    <script>
+      const string1 = '(ab(cd)'
+
+      var minRemoveToMakeValid = function (s) {
+        const res = s.split('') //O(n)
+        const stack = [] //O(n)
+
+        for (let i = 0; i < res.length; i++) {
+          //O(n)
+          if (res[i] === '(') {
+            stack.push(i)
+          } else if (stack.length && res[i] === ')') {
+            stack.pop()
+          } else if (res[i] === ')') {
+            res[i] = ''
+          }
+        }
+
+        while (stack.length) {
+          //O(n)
+          const curIndex = stack.pop()
+          res[curIndex] = ''
+        }
+
+        return res.join('') //O(n)
+      }
+
+      console.log(minRemoveToMakeValid(string1))
+
+      //T:O(n)
+      //S:O(n)
+    </script>
+  </body>
+</html>
