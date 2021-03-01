@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>排序——数组中的第 K 个最大元素</title>
+  </head>
+  <body>
+    <script>
+      //           left            right
+      const array = [1, 3, 5, 6, 4, 2] // ==> [1,2,3,4,5,6]
+      //                i
+      //                          j
+      //            [1,2,5,6,4,3]
+      const kToFind = 4
+
+      //快速排序
+      const quickSort = function (array, left, right) {
+        if (left < right) {
+          const partitionIndex = getParition(array, left, right)
+          quickSort(array, left, partitionIndex - 1)
+          quickSort(array, partitionIndex + 1, right)
+        }
+      }
+
+      //获取基准点索引位置
+      const getParition = function (array, left, right) {
+        //获取初始化确定的基准点
+        const partitionElement = array[right]
+        let i = left
+        for (let j = i; j < right; j++) {
+          if (array[j] < partitionElement) {
+            swap(array, i, j)
+            i++
+          }
+        }
+        swap(array, i, right)
+        return i
+      }
+
+      //交替函数
+      const swap = function (array, i, j) {
+        const temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+      }
+
+      //获取数组中的第 K 个最大元素
+      const getKthLarget = function (array, k) {
+        const indexToFind = array.length - k
+        quickSort(array, 0, array.length - 1)
+        return array[indexToFind]
+      }
+
+      console.log(getKthLarget(array, kToFind))
+      //T : O(nlogn)
+      //S : O(logn)
+    </script>
+  </body>
+</html>
