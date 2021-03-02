@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二叉树的最大深度</title>
+  </head>
+  <body>
+    <script>
+      //解决方案
+      var maxDepth = function (node, currentDepth) {
+        if (!node) {
+          return currentDepth
+        }
+        currentDepth++
+
+        return Math.max(
+          (maxDepth(node.left, currentDepth),
+          maxDepth(node.right, currentDepth))
+        )
+      }
+
+      //时间复杂度：O(n)
+      //空间复杂度：O(n)
+    </script>
+  </body>
+</html>
