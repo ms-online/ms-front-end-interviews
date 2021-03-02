@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>排序——数组中的第 K 个最大元素(快速选择算法)</title>
+  </head>
+  <body>
+    <script>
+      //           left            right
+      const array = [1, 3, 5, 6, 4, 2] // ==> [1,2,3,4,5,6]
+      //                i
+      //                          j
+      //            [1,2,5,6,4,3]
+      //                   right
+      //            [1,[2,[3,[4,]5,]6]  ==> [1,2,3,4,5,6]
+      //                      i
+      //                      j
+      const kToFind = 4
+
+      //快速选择算法
+      const quickSelect = function (array, left, right, indexToFind) {
+        if (left < right) {
+          const partitionIndex = getParition(array, left, right)
+          if (partitionIndex === indexToFind) {
+            return array[partitionIndex]
+          } else if (indexToFind < partitionIndex) {
+            return quickSelect(array, left, partitionIndex - 1, indexToFind)
+          } else {
+            return quickSelect(array, partitionIndex + 1, right, indexToFind)
+          }
+        }
+      }
+
+      //获取基准点索引位置
+      const getParition = function (array, left, right) {
+        //获取初始化确定的基准点
+        const partitionElement = array[right]
+        let i = left
+        for (let j = i; j < right; j++) {
+          if (array[j] < partitionElement) {
+            swap(array, i, j)
+            i++
+          }
+        }
+        swap(array, i, right)
+        return i
+      }
+
+      //交替函数
+      const swap = function (array, i, j) {
+        const temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+      }
+
+      //获取数组中的第 K 个最大元素
+      const getKthLarget = function (array, k) {
+        const indexToFind = array.length - k
+        return quickSelect(array, 0, array.length - 1, indexToFind)
+      }
+
+      console.log(getKthLarget(array, kToFind))
+      //时间复杂度的两种情况：
+      //最好情况：n + n/2 + n/4 + ... = 2n ==> T:O(n)
+      //最差情况：n + n -1 + n -2 + n-3 ... ==> n^2 ==> T:O(n^2)
+      //空间复杂度：O(1)
+    </script>
+  </body>
+</html>
