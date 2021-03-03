@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二叉树的右视图-广度优先搜索</title>
+  </head>
+  <body>
+    <script>
+      //解决方案
+      const rightSideViewBFS = function (root) {
+        if (!root) return []
+        const result = []
+        let queue = [root]
+
+        while (queue.length) {
+          let length = queue.length,
+            count = 0,
+            currentNode
+
+          while (count < length) {
+            currentNode = queue.shift()
+
+            if (currentNode.left) {
+              queue.push(currentNode.left)
+            }
+
+            if (currentNode.right) {
+              queue.push(currentNode.right)
+            }
+
+            count++
+          }
+          //跳出while循环意味着这一层的所有结点遍历完，目前currenNode就应该为这一层级中最后一个结点，右视图可以看到，故将值添加到结果数组
+          result.push(currentNode.value)
+        }
+
+        return result
+      }
+      //时间复杂度：O(n)
+      //空间复杂度：O(n)
+    </script>
+  </body>
+</html>
