@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二叉树的层序遍历-广度优先搜索</title>
+  </head>
+  <body>
+    <script>
+      //解决方案
+      const levelOrder = function (root) {
+        if (!root) return []
+        const result = [] //O(n)
+        const queue = [root] //O(n)
+
+        while (queue.length) {
+          let length = queue.length,
+            count = 0
+
+          const currentLevelValues = []
+
+          while (count < length) {
+            const currentNode = queue.shift()
+            currentLevelValues.push[currentNode.value]
+
+            if (currentNode.left) {
+              queue.push(currentNode.left)
+            }
+
+            if (currentNode.right) {
+              queue.push(currentNode.right)
+            }
+            count++
+          }
+
+          result.push(currentLevelValues)
+        }
+
+        return result
+      }
+      //时间复杂度：O(n)
+      //空间复杂度：O(n)
+    </script>
+  </body>
+</html>
