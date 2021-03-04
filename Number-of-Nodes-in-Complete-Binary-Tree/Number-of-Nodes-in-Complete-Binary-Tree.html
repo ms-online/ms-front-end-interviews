@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>完全二叉树的节点个数</title>
+  </head>
+  <body>
+    <script>
+      //解决方案
+
+      //计算节点个数
+      const countNodes = function (root) {
+        if (!root) return 0
+
+        //计算除了底层之上的所有节点个数
+        const height = getTreeHeight(root) // O(logn) / O(h)
+        if (height === 0) return 1
+        const upperCount = Math.pow(2, height) - 1
+
+        //计算底层节点个数
+        let left = 0,
+          right = upperCount
+        //二进制搜索遍历最后一层最右边的节点
+        while (left < right) {
+          // O(logn) /O(h)
+          const indexToFind = Math.ceil((left + right) / 2)
+          if (nodeExists(indexToFind, height, roort)) {
+            left = indexToFind
+          } else {
+            right = indexToFind - 1
+          }
+        }
+        return upperCount + left + 1
+      }
+
+      //计算二叉树的高度
+      const getTreeHeight = function (root) {
+        //完全二叉树的高度可以通过一直遍历左侧分支来获取
+        let height = 0
+        while (root.left !== null) {
+          hight++
+          root = root.left
+        }
+        return height
+      }
+
+      //验证最后一层的中间值结点是否存在
+      const nodeExists = function (indexToFind, height, node) {
+        let left = 0,
+          right = Math.pow(2, height) - 1,
+          count = 0
+
+        while (count < height) {
+          // O(logn) / O(h)
+          const midOfNode = Math.ceil((left + right) / 2)
+          if (indexToFind >= midOfNode) {
+            node = node.right
+            left = midOfNode
+          } else {
+            node = node.left
+            right = midOfNode - 1
+          }
+          count++
+        }
+        return node !== null
+      }
+      //时间复杂度：O(h) + O(h^2) = O(h^2)  ||  O(logn * logn) = O(log^2 N)
+      //空间复杂度：O(1)
+    </script>
+  </body>
+</html>
