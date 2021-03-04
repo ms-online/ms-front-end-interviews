@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二叉树的右视图-深度优先搜索</title>
+  </head>
+  <body>
+    <script>
+      //解决方案
+      const dfs = function (node, currentLevel, result) {
+        if (!node) return
+
+        if (currentLevel >= result.length) {
+          result.push(node.value)
+        }
+
+        if (node.right) {
+          dfs(node.right, currentLevel + 1, result)
+        }
+
+        if (node.left) {
+          dfs(node.left, currentLevel + 1, result)
+        }
+      }
+
+      const rightSideViewDFS = function (root) {
+        const result = []
+
+        dfs(root, 0, result)
+
+        return result
+      }
+      //时间复杂度：O(n)
+      //空间复杂度：O(n)  ==> O(H)
+    </script>
+  </body>
+</html>
