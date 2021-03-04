@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>验证二叉搜索树</title>
+  </head>
+  <body>
+    <script>
+      //解决方案
+      var isValidBST = function (root) {
+        if (!root) return false
+        return dfs(root, -Infinity, Infinity)
+      }
+      //深度优先搜索递归函数
+      const dfs = function (node, min, max) {
+        if (node.value <= min || node.value >= max) {
+          return false
+        }
+
+        if (node.left) {
+          if (!dfs(node.left, min, node.value)) {
+            return false
+          }
+        }
+
+        if (node.right) {
+          if (!dfs(node.right, node.value, max)) {
+            return false
+          }
+        }
+
+        return true
+      }
+
+      //时间复杂度：O(n)
+      //空间复杂度：O(n)
+    </script>
+  </body>
+</html>
